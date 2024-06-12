@@ -1,18 +1,18 @@
 import type { VNode, VNodeChild } from 'vue'
 
-export interface TableColumnProps {
+export interface TableColumnProps<T = any> {
   /**
    * @description 列的唯一标识
    */
-  key?: string
+  key?: keyof T
   /**
    * @description 表头标题
    */
   title?: string
   /**
-   * @description 列的对齐方式，可选值`left`,`center`
+   * @description 列的对齐方式
    */
-  align?: 'left' | 'right'
+  align?: 'left' | 'center' | 'right'
   /**
    * @description 表头样式
    */
@@ -27,12 +27,12 @@ export interface TableColumnProps {
    * @param row2
    * @returns
    */
-  sorter?: (row1: any, row2: any) => number
+  sorter?: (row1: T, row2: T) => number
   /**
    * @description 自定义渲染列数据，优先级高,仅支持`H5`
    * @param rowData
    * @param rowIndex
    * @returns
    */
-  render?: (rowData?: object, rowIndex?: number) => VNodeChild | string | VNode
+  render?: (rowData: T, rowIndex: number) => VNodeChild | string | VNode
 }
